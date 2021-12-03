@@ -30,7 +30,7 @@ socket.on("created", function () {
   navigator.mediaDevices
     .getUserMedia({
       audio: true,
-      video: { width: 1280, height: 720 },
+      video: { width: 500, height: 500 },
     })
     .then(function (stream) {
       /* use the stream */
@@ -54,7 +54,7 @@ socket.on("joined", function () {
   navigator.mediaDevices
     .getUserMedia({
       audio: true,
-      video: { width: 1280, height: 720 },
+      video: { width: 500, height: 500 },
     })
     .then(function (stream) {
       /* use the stream */
@@ -81,15 +81,14 @@ socket.on("ready", function () {
     rtcPeerConnection = new RTCPeerConnection(iceServers);
     rtcPeerConnection.onicecandidate = OnIceCandidateFunction;
     rtcPeerConnection.ontrack = OnTrackFunction;
-    rtcPeerConnection.addTrack(userStream.getTracks()[0], userStream);
-    rtcPeerConnection.addTrack(userStream.getTracks()[1], userStream);
+    rtcPeerConnection.addTrack(userStream.getTracks()[0], userStream); //audio track
+    rtcPeerConnection.addTrack(userStream.getTracks()[1], userStream); //video track
     rtcPeerConnection
       .createOffer()
       .then((offer) => {
         rtcPeerConnection.setLocalDescription(offer);
         socket.emit("offer", offer, roomName);
       })
-
       .catch((error) => {
         console.log(error);
       });
@@ -107,8 +106,8 @@ socket.on("offer", function (offer) {
     rtcPeerConnection = new RTCPeerConnection(iceServers);
     rtcPeerConnection.onicecandidate = OnIceCandidateFunction;
     rtcPeerConnection.ontrack = OnTrackFunction;
-    rtcPeerConnection.addTrack(userStream.getTracks()[0], userStream);
-    rtcPeerConnection.addTrack(userStream.getTracks()[1], userStream);
+    rtcPeerConnection.addTrack(userStream.getTracks()[0], userStream); //audio track
+    rtcPeerConnection.addTrack(userStream.getTracks()[1], userStream); //video track
     rtcPeerConnection.setRemoteDescription(offer);
     rtcPeerConnection
       .createAnswer()

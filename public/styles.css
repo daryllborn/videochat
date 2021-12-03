@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-color: white;
   font-family: "Helvetica";
 }
 
@@ -12,14 +12,24 @@ h2 {
 #video-chat-lobby {
   text-align: center;
   max-width: 600px;
-  background-color: #141414;
+  background-color: black;
   margin: 30px auto;
 }
 
+#video-chat-room{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 #chat-window {
+  display: none;
+  justify-content: center;
   height: 400px;
+  width: 1000px;
   overflow: auto;
-  background: #f9f9f9;
+  background: #c2c2c2;
 }
 
 #output p {
@@ -57,9 +67,34 @@ input {
 }
 
 button {
-  background: #141414;
+  background: #59b256;
   color: #fff;
   font-size: 18px;
   padding: 12px 0;
   width: 100%;
+}
+
+.btn-group button {
+  background-color: #59b256; /* Green background */
+  border: 1px solid white;
+  color: white;
+  padding: 10px 24px;
+  cursor: pointer;
+  float: left;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none;
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: crimson;
 }
