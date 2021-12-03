@@ -15,6 +15,12 @@ let muteButton = document.getElementById("muteButton");
 let hideCameraButton = document.getElementById("hideCameraButton");
 let leaveRoomButton = document.getElementById("leaveRoomButton");
 
+let divChatApp = document.getElementById("chat-app");
+let message = document.getElementById("message");
+let button = document.getElementById("send");
+let username = document.getElementById("username");
+let output = document.getElementById("output");
+
 let muteFlag = false;
 let hideCameraFlag = false;
 
@@ -62,6 +68,7 @@ leaveRoomButton.addEventListener("click", function () {
 
   divVideoChatLobby.style = "display:block"; //Brings back the Lobby UI
   divButtonGroup.style = "display:none";
+  divChatApp.style = "display:none";
 
   if (userVideo.srcObject) {
     userVideo.srcObject.getTracks()[0].stop(); //Stops receiving audio track of User.
@@ -81,6 +88,16 @@ leaveRoomButton.addEventListener("click", function () {
   }
 });
 
+
+button.addEventListener("click", function () {
+  socket.emit("sendingMessage", {
+    message: message.value,
+    username: username.value,
+    roomName: roomName,
+  });
+});
+
+
 // Triggered when a room is succesfully created.
 
 socket.on("created", function () {
@@ -96,10 +113,12 @@ socket.on("created", function () {
       userStream = stream;
       divVideoChatLobby.style = "display:none";
       divButtonGroup.style = "display:flex";
+      divChatApp.style = "display:block";
       userVideo.srcObject = stream;
       userVideo.onloadedmetadata = function (e) {
         userVideo.play();
       };
+
     })
     .catch(function (err) {
       /* handle the error */
@@ -122,6 +141,7 @@ socket.on("joined", function () {
       userStream = stream;
       divVideoChatLobby.style = "display:none";
       divButtonGroup.style = "display:flex";
+      divChatApp.style = "display:block";
       userVideo.srcObject = stream;
       userVideo.onloadedmetadata = function (e) {
         userVideo.play();
@@ -217,6 +237,11 @@ socket.on("leave", function () {
     rtcPeerConnection.close();
     rtcPeerConnection = null;
   }
+});
+
+socket.on("broadcastMessage", function (data) {
+  output.innerHTML +=
+    "<p><strong>" + data.username + ": </strong>" + data.message + "</p>";
 });
 
 // Implementing the OnIceCandidateFunction which is part of the RTCPeerConnection Interface.

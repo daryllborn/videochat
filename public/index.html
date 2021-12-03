@@ -9,6 +9,7 @@
   <body>
     <div id="video-chat-lobby">
       <h2 class="text">Born Video Chat</h2>
+      <input id="username" type="text" placeholder="Username" />
       <input id="roomName" type="text" placeholder="Room Name" />
       <button id="join">Join</button>
     </div>
@@ -23,11 +24,14 @@
       <button id="leaveRoomButton">Leave Room</button>
     </div>
 
-    <div id="chat-window" style="display: none;">
-      <video id="chat"></video>
-      <video id="input"></video>
-      <button id="send">Send</button>
+    <div id="chat-app" style="display: none;">        
+        <div id="chat-window">
+            <div id="output"></div>
+        </div>
+        <input id="message" type="text" placeholder="Message" />
+        <button id="send">Send</button>
     </div>
+
   </body>
   <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
   <script src="/videoChat.js"></script>

@@ -48,4 +48,11 @@ io.on("connection", (socket) => {
     socket.broadcast.to(roomName).emit("answer", answer);
     console.log("answer");
   });
+
+  socket.on("sendingMessage", function (data) {
+    io.in(data.roomName).emit('broadcastMessage', data);
+  });
+
+
+
 });
