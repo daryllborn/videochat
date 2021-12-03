@@ -17,14 +17,27 @@ joinButton.addEventListener("click", function () {
   }
 });
 
-async function getMedia(constraints) {
-  let stream = null;
+// Triggered when a room is succesfully created.
 
-  try {
-    stream = await navigator.mediaDevices.getUserMedia(constraints);
-    /* use the stream */
-  } catch(err) {
-    /* handle the error */
-    console.log(err.message);
-  }
-}
+socket.on("created", function () {
+  creator = true;
+
+  navigator.mediaDevices
+    .getUserMedia({
+      audio: true,
+      video: { width: 1280, height: 720 },
+    })
+    .then(function (stream) {
+      /* use the stream */
+      userStream = stream;
+      videoChatLobby.style = "display:none";
+      userVideo.srcObject = stream;
+      userVideo.onloadedmetadata = function (e) {
+        userVideo.play();
+      };
+    })
+    .catch(function (err) {
+      /* handle the error */
+      alert("Couldn't Access User Media");
+    });
+});
