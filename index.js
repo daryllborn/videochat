@@ -31,21 +31,21 @@ io.on("connection", (socket) => {
 
   socket.on("ready", (roomName) => {
     socket.broadcast.to(roomName).emit("ready");
+    console.log("ready");
   });
 
   socket.on("candidate", (candidate, roomName) => {
     socket.broadcast.to(roomName).emit("candidate", candidate);
+    console.log("candidate");
   });
 
   socket.on("offer", (offer, roomName) => {
     socket.broadcast.to(roomName).emit("offer", offer);
+    console.log("offer");
   });
 
   socket.on("answer", (answer, roomName) => {
     socket.broadcast.to(roomName).emit("answer", answer);
+    console.log("answer");
   });
-
-
-
-
 });
