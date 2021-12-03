@@ -4,7 +4,7 @@ body {
 }
 
 h2 {
-  font-size: 18px;
+  font-size: 30px;
   padding: 10px 20px;
   color: #ffffff;
 }
@@ -22,10 +22,11 @@ h2 {
   background: #f9f9f9;
 }
 
+
 #output p {
   padding: 14px 0px;
   margin: 0 20px;
-  border-bottom: 1px solid #e9e9e9;
+  border-bottom: 1px solid white;
   color: #555;
 }
 
@@ -57,10 +58,10 @@ input {
 }
 
 #join {
-  background: #141414;
+  background: black;;
   color: #fff;
-  font-size: 18px;
-  padding: 12px 0;
+  font-size:30px;
+  padding: 20px 0;
   width: 100%;
 }
 
@@ -83,7 +84,7 @@ input {
 }
 
 .btn-group button {
-  background-color: skyblue; /* Green background */
+  background-color: #59b256; /* Green background */
   border: 1px solid white; /* Green border */
   color: white; /* White text */
   padding: 10px 24px; /* Some padding */
