@@ -69,6 +69,7 @@ leaveRoomButton.addEventListener("click", function () {
   divVideoChatLobby.style = "display:block"; //Brings back the Lobby UI
   divButtonGroup.style = "display:none";
   divChatApp.style = "display:none";
+  divVideoChat.style = "display:none";
 
   if (userVideo.srcObject) {
     userVideo.srcObject.getTracks()[0].stop(); //Stops receiving audio track of User.
@@ -113,7 +114,8 @@ socket.on("created", function () {
       userStream = stream;
       divVideoChatLobby.style = "display:none";
       divButtonGroup.style = "display:flex";
-      divChatApp.style = "display:block";
+      divChatApp.style = "display:block";  
+      divVideoChat.style = "display: flex";
       userVideo.srcObject = stream;
       userVideo.onloadedmetadata = function (e) {
         userVideo.play();
@@ -142,6 +144,7 @@ socket.on("joined", function () {
       divVideoChatLobby.style = "display:none";
       divButtonGroup.style = "display:flex";
       divChatApp.style = "display:block";
+      divVideoChat.style = "display: flex";
       userVideo.srcObject = stream;
       userVideo.onloadedmetadata = function (e) {
         userVideo.play();
